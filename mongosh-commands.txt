@@ -1,0 +1,214 @@
+// MongoDB Shell commands for Ex.No 9 - paste into mongosh section by section
+
+// ================= Sample Steps 1–11 =================
+use CollegeDB
+
+// Step 2 · Show current database
+db
+
+// Step 3 · Create a collection
+db.createCollection("students")
+
+// Step 3 · Show collections
+show collections
+
+// Step 4 · insertOne
+db.students.insertOne({ rollNo: 101, name: "Arun", department: "CSE", age: 20, mark: 85 })
+
+// Step 4 · insertMany
+db.students.insertMany([
+  { rollNo: 102, name: "Priya", department: "IT", age: 21, mark: 92 },
+  { rollNo: 103, name: "Kumar", department: "CSE", age: 19, mark: 78 },
+  { rollNo: 104, name: "Divya", department: "ECE", age: 20, mark: 88 },
+  { rollNo: 105, name: "Ravi", department: "CSE", age: 22, mark: 67 }
+])
+
+// Step 5 · Display all records
+db.students.find().pretty()
+
+// Step 5 · Find by name
+db.students.find({ name: "Priya" })
+
+// Step 5 · findOne from CSE
+db.students.findOne({ department: "CSE" })
+
+// Step 6 · Marks greater than 80
+db.students.find({ mark: { $gt: 80 } })
+
+// Step 6 · Age between 20 and 21
+db.students.find({ age: { $gte: 20, $lte: 21 } })
+
+// Step 6 · CSE or IT
+db.students.find({ department: { $in: ["CSE", "IT"] } })
+
+// Step 6 · Marks less than 80
+db.students.find({ mark: { $lt: 80 } })
+
+// Step 7 · Update Arun's marks
+db.students.updateOne({ rollNo: 101 }, { $set: { mark: 90 } })
+
+// Step 7 · +5 marks for all CSE
+db.students.updateMany({ department: "CSE" }, { $inc: { mark: 5 } })
+
+// Step 7 · Verify updates
+db.students.find()
+
+// Step 8 · deleteOne (roll 105)
+db.students.deleteOne({ rollNo: 105 })
+
+// Step 8 · deleteMany (marks below 70)
+db.students.deleteMany({ mark: { $lt: 70 } })
+
+// Step 9 · Sort by marks (high to low)
+db.students.find().sort({ mark: -1 })
+
+// Step 9 · Top three students
+db.students.find().sort({ mark: -1 }).limit(3)
+
+// Step 10 · Count all students
+db.students.countDocuments()
+
+// Step 10 · Count CSE students
+db.students.countDocuments({ department: "CSE" })
+
+// Step 11 · Show databases
+show dbs
+
+// Step 11 · Database statistics
+db.stats()
+
+// ================= Q1 · Student Database Management =================
+use CollegeDB
+
+// Create DB + insert 5 students
+db.students.insertMany([
+  { rollNo: 101, name: "Arun", department: "CSE", age: 20, mark: 85 },
+  { rollNo: 102, name: "Priya", department: "IT", age: 21, mark: 92 },
+  { rollNo: 103, name: "Kumar", department: "CSE", age: 19, mark: 78 },
+  { rollNo: 104, name: "Divya", department: "ECE", age: 20, mark: 88 },
+  { rollNo: 105, name: "Ravi", department: "CSE", age: 22, mark: 67 }
+])
+
+// a. Display all student records
+db.students.find()
+
+// b. Find a student by roll number
+db.students.find({ rollNo: 103 })
+
+// c. Students who scored more than 80
+db.students.find({ mark: { $gt: 80 } })
+
+// d. Update marks of a student
+db.students.updateOne({ rollNo: 104 }, { $set: { mark: 95 } })
+
+// e. Delete a student by roll number
+db.students.deleteOne({ rollNo: 105 })
+
+// ================= Q2 · Employee Database =================
+use EmployeeDB
+
+// Create DB + insert 5 employees
+db.employees.insertMany([
+  { empId: 1, name: "Anand", department: "IT", salary: 52000, experience: 4 },
+  { empId: 2, name: "Meena", department: "HR", salary: 38000, experience: 3 },
+  { empId: 3, name: "Suresh", department: "IT", salary: 61000, experience: 7 },
+  { empId: 4, name: "Lakshmi", department: "Finance", salary: 45000, experience: 5 },
+  { empId: 5, name: "Karthik", department: "HR", salary: 35000, experience: 2 }
+])
+
+// a. Display all employees
+db.employees.find()
+
+// b. Earning more than ₹40,000
+db.employees.find({ salary: { $gt: 40000 } })
+
+// c. Update an employee's salary
+db.employees.updateOne({ empId: 2 }, { $set: { salary: 42000 } })
+
+// d. Descending order of salary
+db.employees.find().sort({ salary: -1 })
+
+// e. Count employees in a department
+db.employees.countDocuments({ department: "IT" })
+
+// ================= Q3 · Product Database =================
+use ProductDB
+
+// Create DB + insert products
+db.products.insertMany([
+  { productId: 1, name: "Keyboard", category: "Electronics", price: 1200, stock: 25 },
+  { productId: 2, name: "Mouse", category: "Electronics", price: 600, stock: 40 },
+  { productId: 3, name: "Notebook", category: "Stationery", price: 80, stock: 0 },
+  { productId: 4, name: "Backpack", category: "Accessories", price: 1800, stock: 12 },
+  { productId: 5, name: "Headphones", category: "Electronics", price: 2500, stock: 0 },
+  { productId: 6, name: "Water Bottle", category: "Accessories", price: 450, stock: 30 }
+])
+
+// a. Products of a category
+db.products.find({ category: "Electronics" })
+
+// b. Priced between ₹500 and ₹2,000
+db.products.find({ price: { $gte: 500, $lte: 2000 } })
+
+// c. Increase stock of a product
+db.products.updateOne({ productId: 1 }, { $inc: { stock: 10 } })
+
+// d. Delete products with zero stock
+db.products.deleteMany({ stock: 0 })
+
+// e. Five most expensive products
+db.products.find().sort({ price: -1 }).limit(5)
+
+// ================= Q4 · Library Database =================
+use LibraryDB
+
+// Create DB + insert books
+db.books.insertMany([
+  { bookId: 1, title: "Wings of Fire", author: "A. P. J. Abdul Kalam", category: "Biography", price: 250 },
+  { bookId: 2, title: "Ignited Minds", author: "A. P. J. Abdul Kalam", category: "Inspiration", price: 220 },
+  { bookId: 3, title: "Clean Code", author: "Robert C. Martin", category: "Technology", price: 900 },
+  { bookId: 4, title: "The Pragmatic Programmer", author: "Andrew Hunt", category: "Technology", price: 850 },
+  { bookId: 5, title: "Godan", author: "Premchand", category: "Novel", price: 180 }
+])
+
+// a. Books by an author
+db.books.find({ author: "A. P. J. Abdul Kalam" })
+
+// b. Books in a category
+db.books.find({ category: "Technology" })
+
+// c. Update the price of a book
+db.books.updateOne({ title: "Godan" }, { $set: { price: 200 } })
+
+// d. Sort alphabetically by title
+db.books.find().sort({ title: 1 })
+
+// e. Count books
+db.books.countDocuments()
+
+// ================= Q5 · Query Operations (students) =================
+use CollegeDB
+
+// Insert sample students
+db.students.insertMany([
+  { rollNo: 101, name: "Arun", department: "CSE", age: 20, mark: 85 },
+  { rollNo: 102, name: "Priya", department: "IT", age: 21, mark: 92 },
+  { rollNo: 103, name: "Kumar", department: "CSE", age: 19, mark: 78 },
+  { rollNo: 104, name: "Divya", department: "ECE", age: 20, mark: 88 },
+  { rollNo: 105, name: "Ravi", department: "CSE", age: 22, mark: 67 }
+])
+
+// a. Marks greater than or equal to 75
+db.students.find({ mark: { $gte: 75 } })
+
+// b. Age less than 21
+db.students.find({ age: { $lt: 21 } })
+
+// c. Either CSE or IT
+db.students.find({ department: { $in: ["CSE", "IT"] } })
+
+// d. Top three students by marks
+db.students.find().sort({ mark: -1 }).limit(3)
+
+// e. updateMany – bonus 2 marks to all ECE and IT
+db.students.updateMany({ department: { $in: ["ECE", "IT"] } }, { $inc: { mark: 2 } })

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balaji | MongoDB Shell Practical</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar" id="navbar">
+  <a href="#home" class="logo">Balaji<span>.</span></a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#home">Home</a><a href="#about">About</a><a href="#education">Education</a><a href="#skills">Skills</a>
+    <a href="#projects">Projects</a><a href="#mongo">MongoDB Lab</a><a href="#contact">Contact</a>
+  </nav>
+  <span class="clock" id="clock"></span>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu">&#9776;</button>
+</header>
+
+<section id="home" class="hero">
+  <div>
+    <p class="hello">Hello, I am</p>
+    <h1>Balaji</h1>
+    <h2><span id="typed"></span><span class="cursor">|</span></h2>
+    <p class="muted">Student at Karunya University (2024–2028), interested in technology and software development.</p>
+    <div class="chips"><span>🏫 SSMHSS</span><span>🎓 Karunya University</span><span>📅 2024 – 2028</span><span>✉️ balajie24@karunya.edu.in</span></div>
+    <div class="btn-row"><a class="btn primary" href="#mongo">Open MongoDB Lab</a><a class="btn" href="#projects">View projects</a></div>
+  </div>
+  <div class="db-art" aria-hidden="true"><div class="leaf">🍃</div><div class="ring r1"></div><div class="ring r2"></div></div>
+</section>
+
+<section id="about" class="section reveal">
+  <h2 class="title">About Me</h2>
+  <div class="grid">
+    <div class="glass"><p>I am Balaji, a college student at Karunya University with a strong interest in technology and software development. I enjoy building websites and learning how data is stored and used behind an application.</p>
+      <p>My project E-DOUSE started from a simple idea: make laundry easier and cheaper for people living in PGs.</p></div>
+    <div class="glass mini"><h3>🚀 What drives me</h3><p>Turning an idea into something people can open and use.</p></div>
+    <div class="glass mini"><h3>📚 Currently learning</h3><p>Web technologies, Python and databases such as MongoDB.</p></div>
+    <div class="glass mini"><h3>🧭 My goal</h3><p>To grow into a confident software developer.</p></div>
+  </div>
+</section>
+
+<section id="education" class="section reveal">
+  <h2 class="title">Education</h2>
+  <div class="grid"><div class="glass"><h3>SSMHSS</h3><p class="muted">School education</p></div>
+    <div class="glass"><h3>Karunya University</h3><p class="muted">2024 – 2028 · Currently studying</p></div></div>
+</section>
+
+<section id="skills" class="section reveal">
+  <h2 class="title">Skills</h2>
+  <div class="grid">
+    <div class="glass"><h3>🌐 HTML</h3><div class="bar"><i data-level="85"></i></div></div>
+    <div class="glass"><h3>🎨 CSS</h3><div class="bar"><i data-level="80"></i></div></div>
+    <div class="glass"><h3>⚡ JavaScript</h3><div class="bar"><i data-level="70"></i></div></div>
+    <div class="glass"><h3>🐍 Python</h3><div class="bar"><i data-level="65"></i></div></div>
+    <div class="glass"><h3>🍃 MongoDB</h3><div class="bar"><i data-level="55"></i></div></div>
+  </div>
+</section>
+
+<section id="projects" class="section reveal">
+  <h2 class="title">Projects</h2>
+  <div class="glass">
+    <span class="badge">Featured project</span>
+    <h3>E-DOUSE – Online Laundry Service</h3>
+    <p class="muted">An online laundry service platform designed especially for PG residents. It provides affordable laundry services at a lower cost and lets users place laundry orders and track the progress of their laundry.</p>
+    <p class="muted">💡 Where MongoDB fits: a platform like this needs to store customers and orders, which is the kind of data a document database holds as flexible JSON-like documents.</p>
+  </div>
+  <div class="grid" style="margin-top:1.2rem">
+    <div class="glass mini"><span class="badge">Practical</span><h3>MongoDB Shell Commands</h3><p>Create, insert, query, update, delete, sort and count, on this page.</p></div>
+    <div class="glass mini"><span class="badge">Practical</span><h3>jQuery, React, JavaScript</h3><p>Earlier practicals built into portfolio websites.</p></div>
+  </div>
+</section>
+
+<!-- MONGODB LAB -->
+<section id="mongo" class="section">
+  <h2 class="title">Ex.No 9 · MongoDB Shell Lab</h2>
+  <p class="muted lead"><b>Objective:</b> perform database operations such as creating a database and collections, inserting, retrieving, updating and deleting documents, and querying data using MongoDB Shell commands. Press <b>Run</b> on any command or type your own in the shell. This simulator uses the same syntax as <code>mongosh</code> and stores data in memory only.</p>
+
+  <div class="glass ops">
+    <b>Query operators:</b>
+    <span><code>$gt</code> greater than</span><span><code>$gte</code> greater or equal</span><span><code>$lt</code> less than</span><span><code>$lte</code> less or equal</span><span><code>$in</code> in a list</span><span><code>$set</code> set a value</span><span><code>$inc</code> add to a value</span>
+  </div>
+
+  <div class="lab-layout">
+    <div id="lessons" class="lessons"></div>
+    <div class="shell">
+      <div class="term-head"><i></i><i></i><i></i><span>mongosh – MongoDB Shell simulator</span></div>
+      <div id="term" class="term" aria-live="polite"></div>
+      <div class="term-input">
+        <span id="prompt">test&gt;</span>
+        <textarea id="editor" rows="3" spellcheck="false" placeholder="Type a command, e.g. use CollegeDB   (Ctrl+Enter to run)"></textarea>
+      </div>
+      <div class="btn-row term-btns">
+        <button class="btn small primary" id="runBtn">Run ▶</button>
+        <button class="btn small" id="clearBtn">Clear screen</button>
+        <button class="btn small" id="resetBtn">Reset all databases</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section reveal">
+  <h2 class="title">Contact</h2>
+  <div class="grid">
+    <div class="glass"><h3>Let's connect</h3><p class="muted">Have a question or an idea? Send me a message.</p>
+      <p>✉️ <a class="accent" href="mailto:balajie24@karunya.edu.in">balajie24@karunya.edu.in</a></p></div>
+    <form id="contactForm" class="glass" novalidate>
+      <label>Name<input id="name" placeholder="Max 8 letters"><small class="err" id="nameErr"></small></label>
+      <label>Email<input id="email" type="email" placeholder="you@example.com"><small class="err" id="emailErr"></small></label>
+      <label>Phone<input id="phone" placeholder="10 digits, starts with 6-9"><small class="err" id="phoneErr"></small></label>
+      <label>Message<textarea id="message" rows="3"></textarea><small class="err" id="messageErr"></small></label>
+      <button class="btn primary" type="submit">Send message</button><p class="ok" id="formSuccess"></p>
+    </form>
+  </div>
+</section>
+<footer>© 2026 Balaji · Karunya University</footer>
+<script src="script.js"></script>
+</body>
+</html>
